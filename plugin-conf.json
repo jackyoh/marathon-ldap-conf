@@ -1,0 +1,116 @@
+{
+    "plugins": {
+        "authorization": {
+            "plugin": "mesosphere.marathon.plugin.auth.Authorizer",
+            "implementation": "io.containx.marathon.plugin.auth.LDAPAuthorizor"
+        },
+        "authentication": {
+            "plugin": "mesosphere.marathon.plugin.auth.Authenticator",
+            "implementation": "io.containx.marathon.plugin.auth.LDAPAuthenticator",
+            "configuration": {
+                "users": [
+                    {
+                        "username": "admin",
+                        "password": "admin",
+                        "groups": [
+                            "Admin"
+                        ]
+                    },
+                    {
+                        "username": "jack",
+                        "password": "jack",
+                        "groups": [
+                            "View_Create"
+                        ]
+                    },
+                    {
+                       "username": "sameuser",
+                       "password": "samepass",
+                       "groups": [
+                            "OnlyView"
+                       ]
+                    }
+                ],
+                "authorization": {
+                    "access": [
+                        {
+                            "group": "View_Create",
+                            "permissions": [
+                                {
+                                    "allowed": "view",
+                                    "type": "app",
+                                    "path": "/"
+                                },
+                                {
+                                    "allowed": "view",
+                                    "type": "group",
+                                    "path": "/"
+                                },
+                                {
+                                    "allowed": "create",
+                                    "type": "app"
+                               }
+                            ]
+                        },
+                        {
+                           "group": "OnlyView",
+                           "permissions": [
+                               {
+                                   "allowed": "view",
+                                   "type": "app"
+                               },
+                               {
+                                   "allowed": "view",
+                                   "type": "group"
+                               }
+                           ]
+                        },
+                        {
+                            "group": "Admin",
+                            "permissions": [
+                                {
+                                    "allowed": "*",
+                                    "type"   : "app"
+                                },
+                                {
+                                    "allowed": "*",
+                                    "type"   : "group"
+                                }
+                            ]
+                        },
+                        {
+                            "group": "Developers",
+                            "permissions": [
+                                {
+                                    "allowed": "view",
+                                    "type": "app",
+                                    "path": "/"
+                                },
+                                {
+                                    "allowed": "view",
+                                    "type": "group",
+                                    "path": "/"
+                                },
+                                {
+                                    "allowed": "create",
+                                    "type": "app",
+                                    "path": "/dev"
+                                },
+                                {
+                                    "allowed": "update",
+                                    "type": "app",
+                                    "path": "/dev"
+                                },
+                                {
+                                    "allowed": "delete",
+                                    "type": "app",
+                                    "path": "/dev"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
