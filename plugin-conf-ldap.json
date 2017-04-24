@@ -9,7 +9,7 @@
             "implementation": "io.containx.marathon.plugin.auth.LDAPAuthenticator",
             "configuration": {
                 "ldap": {
-                    "url": "ldap://192.168.1.13:389",
+                    "url": "ldap://192.168.1.223:389",
                     "base": "ou=Users,dc=openstack,dc=org",
                     "dn": "uid={username}",
                     "userSearch": "uid={username}",
@@ -27,7 +27,37 @@
                 "authorization": {
                     "access": [
                         {
-                            "group": "admin3",
+                           "group": "createView",
+                           "permissions": [
+                                {
+                                   "allowed": "view",
+                                   "type": "app"
+                                },
+                                {
+                                   "allowed": "view",
+                                   "type": "group"
+                                },
+                                {
+                                   "allowed": "create",
+                                   "type": "app"
+                                }
+                           ]
+                        },
+                        {
+                            "group": "view",
+                            "permissions": [
+                                {
+                                    "allowed": "view",
+                                    "type": "app"
+                                },
+                                {
+                                    "allowed": "view",
+                                    "type": "group"
+                                }
+                            ]
+                        },
+                        {
+                            "group": "admin",
                             "permissions": [
                                 {
                                     "allowed": "*",
