@@ -18,10 +18,7 @@
                 "users": [
                     {
                         "username": "someuser",
-                        "password": "somepass",
-                        "groups": [
-                            "Admin"
-                        ]
+                        "password": "somepass"
                     }
                 ],
                 "authorization": {
